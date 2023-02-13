@@ -13,11 +13,11 @@
         <a href="{% url 'posts' %}">{{ post.user }}</a>
       {% endif %}
   
-      <small>{{ post.time_created|date:"- H:i - d F Y -" }}</small>
+      <small>{{ post.time_created|date:"- H:i - d F Y " }}</small>
   
       {% if post.user == user %}
-          <a href="{% url 'review_update' post.id %}">Modifier</a>
-          <a href="{% url 'review_delete' post.id %}">Supprimer</a>
+          <a href="{% url 'review_update' post.id %}">- Modifier</a>
+          <a href="{% url 'review_delete' post.id %}">- Supprimer</a>
       {% elif post.user not in followed_users %}
           <div>
             <small> Vous n'êtes pas abonné à {{ post.user }}</small>
@@ -54,11 +54,11 @@
               <a href="{% url 'posts' %}">{{ post.ticket.user }}</a>
             {% endif %}
   
-            <small>{{ post.ticket.time_created|date:"- H:i - d F Y -" }}</small>
+            <small>{{ post.ticket.time_created|date:"- H:i - d F Y " }}</small>
   
             {% if post.ticket.user == user %}
-              <a href="{% url 'ticket_update' post.ticket.id %}">Modifier</a>
-              <a href="{% url 'ticket_delete' post.ticket.id %}">Supprimer</a>
+              <a href="{% url 'ticket_update' post.ticket.id %}">- Modifier</a>
+              <a href="{% url 'ticket_delete' post.ticket.id %}">- Supprimer</a>
             {% elif post.ticket.user not in followed_users %}
          </br><div style="display:inline">
                 Vous n'êtes pas abonné à {{ post.ticket.user }}

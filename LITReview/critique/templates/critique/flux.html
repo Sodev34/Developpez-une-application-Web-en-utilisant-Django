@@ -10,13 +10,12 @@
 </div>
 
 {% if posts %}
-<!--  {% include 'critique/pagination.html' %} -->
   {% for post in posts %}
 
     {% if post.content_type == 'REVIEW' %}
-      {% include 'critique/review_snippet.html' %}
+      {% include 'critique/review_base.html' %}
     {% elif post.content_type == 'TICKET' %}
-      {% include 'critique/ticket_snippet.html' %}
+      {% include 'critique/ticket_base.html' %}
     {% endif %}
 
   {% endfor %} </br>

@@ -22,7 +22,7 @@
   
         {% if post.user == user %}
           <a href="{% url 'ticket_update' post.id %}">- Modifier</a>
-          <a href="{% url 'ticket_delete' post.id %}">Supprimer</a>
+          <a href="{% url 'ticket_delete' post.id %}">- Supprimer</a>
         {% elif post.user not in followed_users %}
           <div>
             <i>Vous n'êtes pas abonné à {{ post.user }}</i>
