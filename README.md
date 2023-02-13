@@ -12,7 +12,9 @@ ____
 
      cd Developpez-une-application-Web-en-utilisant-Django
        
-### 3. activer un environnement virtuel :
+### 3. Créer et activer un environnement virtuel :
+
+     python3 -m venv env
 
      source env/bin/activate
 
@@ -20,10 +22,22 @@ ____
 
      pip install -r requirements.txt
 
-### 5. Lancer le programme :
+### 5. Créer un super user :
 
-     python3 main.py
-     
-### 6.  : 
+     cd LITReview 
 
+     python3 manage.py createsuperuser
      
+### 6. Démarrer le serveur : 
+
+     python3 manage.py runserver 
+
+### 7. Naviguer vers le site :
+
+    Ouvrir un navigateur, et aller à l'adresse du site. ex : http://127.0.0.1:8000/
+
+    Nom d'utilisateur : MAXIM
+    Mot de passe : MAXIM123456
+
+    Nom d'utilisateur :LUCA
+    Mot de passe : LUCA1234
