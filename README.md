@@ -34,7 +34,7 @@ ____
 
 ### 7. Naviguer vers le site :
 
-    Ouvrir un navigateur, et aller à l'adresse du site. ex : http://127.0.0.1:8000/
+    Ouvrir un navigateur, et aller à l'adresse du site : http://127.0.0.1:8000/
 
     Nom d'utilisateur : MAXIM
     Mot de passe : MAXIM123456
