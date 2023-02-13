@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if title == 'Ticket' %}
+  {% include 'critique/ticket_snippet.html' %}
+{% elif title == 'Critique du livre' %}
+  {% include 'critique/review_snippet.html' %}
+{% endif %}
+
+{% endblock content %}

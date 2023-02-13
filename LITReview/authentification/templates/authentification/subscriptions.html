@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!--<div class="container">-->
+    <div class="form form__search">
+        <h3>Suivre d'autres utilisateurs</h3>
+          <form method="POST">
+            {% csrf_token %}
+            <label class="label" for="followed_user"></label>
+            <input class="input" id="followed_user" type="text" name="followed_user" placeholder="Entrer un nom d'utilisateur">                                          
+            <button class="btn btn-secondary" type="submit">S'abonner</button>
+            {% if messages %}
+            <div class="alert alert-danger" role="alert"">
+              {% for message in messages %}
+              <div>{{ message.message }}</div>
+              {% endfor %}
+            </div>
+            {% endif %} 
+          </form>
+    </div>
+    <div class="form form-sub">
+        <h3> Abonnements ({{ user_follows.count }})</h3>
+        {% if user_follows %}
+          <div>
+            <ul class="list-group">
+              {% for follow in user_follows %}
+                <li class="list-group-item ">
+                    {{ follow.followed_user.username }}
+                   <img src="{{ follow.followed_user.profile.image.url }}" alt="image de profil"> 
+                    <a class="list-item-btn float-end" href="{% url 'unsubscribe' follow.id %}">SE DESABONNER</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% elif not user_follows %}
+          <div>
+              <h4>Vous n'êtes abonné à personne.</h4>
+              <h4>Suivez d'autres utilisateurs.</h4>
+          </div>
+        {% endif %}
+    </div>
+    <div class="form form sub">
+        <h3>Abonnés ({{ followed_by.count }})</h3>
+        {% if followed_by %}
+          <div>
+            <ul class="list-group">
+              {% for follow in followed_by %}
+                <li class="list-group-item">
+                    {{ follow.user.username }}
+                    <img src="{{ follow.user.profile.image.url }}"  alt="image de profil">
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% elif not followed_by %}
+          <div>
+              <h4>Personne ne vous suit.</h4>
+              <h4>Suivez d'autres utilisateurs.</h4>
+          </div>
+        {% endif %}
+    </div>
+<!--</div>-->
+
+{% endblock content %}

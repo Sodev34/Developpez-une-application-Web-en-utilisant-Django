@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+  <h3>CONFIRMATION</h3>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="form form__unsub">
+      <p>
+        <h4>Je confirme ma désinscription pour {{ unsub.followed_user }}?</h4>
+        <a class="btn btn-secondary text-white" href="{% url 'subscriptions' %}">Annuler</a>
+        <button class="btn btn-secondary" type="submit">Oui, me désinscrire</button>
+      </p>
+    </div>
+  </form>
+</div>
+
+{% endblock content %}

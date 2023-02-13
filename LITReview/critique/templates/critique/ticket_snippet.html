@@ -1,0 +1,61 @@
+
+<article class="form form-ticket">
+
+    <img src="{{ post.user.profile.image.url }}" alt="{{ post.user.username }} profile image">
+  
+    <div>
+      <div class="article">
+  
+        {% if post.user != user %}
+  
+          {% if post.user in followed_users %}
+            <a href="{% url 'user_posts' post.user.id %}">{{ post.user }}</a>
+          {% else %}
+            <p style="display:inline">{{ post.user }}</p>
+          {% endif %}
+  
+        {% else %}
+          <a href="{% url 'posts' %}">{{ post.user }}</a>
+        {% endif %}
+  
+        <small>{{ post.time_created|date:"- H:i - d F Y -" }}</small>
+  
+        {% if post.user == user %}
+          <a href="{% url 'ticket_update' post.id %}">Modifier</a>
+          <a href="{% url 'ticket_delete' post.id %}">Supprimer</a>
+        {% elif post.user not in followed_users %}
+          <div>
+            <i>Vous n'êtes pas abonné à {{ post.user }}</i>
+        <!--    <a href="{% url 'subscriptions' %}">S'abonner</a>-->
+          </div>
+        {% endif %}
+  
+      </div>
+    </br><h5><span>Ticket</span></h5></br>
+      <h5><a href="{% url 'ticket_detail' post.id %}">{{ post.title }}</a></h5>
+      <div class="ticket-description">
+  
+        {% if post.image %}
+          <img src="{{ post.image.url }}" alt="{{ post.title }}">
+        {% endif %}
+  
+        <p>{{ post.description }}</p>
+      </div>
+  
+      {% if r_tickets and post in r_tickets %}
+        {% for reply in r_reviews %}
+          {% if post == reply.ticket %}
+            <div>
+              <a class="btn btn-secondary text-white" href="{% url 'review_detail' reply.id %}">Afficher la critique  </a>
+            </div>
+          {% endif %}
+        {% endfor %}
+  
+      {% elif post not in r_tickets %}
+        <div>
+          <a class="btn btn-secondary text-white" href="{% url 'response_review' post.id %}">Créer une critique</a>
+        </div>
+      {% endif %}
+  
+    </div>
+</article>

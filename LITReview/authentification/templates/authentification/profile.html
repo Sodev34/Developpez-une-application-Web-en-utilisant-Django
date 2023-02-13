@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="form form__profil">
+    <img src="{{ user.profile.image.url }}" alt="{{ user.username }} profile picture" >
+    <div>
+      <h3> {{ user.username }} </h3>
+    </div>
+    <div>
+        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+          <div class="form_update">
+             {{ p_form.as_p }}
+             {{ i_form }}
+          <input class="btn btn-secondary" type="submit" value="Mettre à jour">
+          </div>
+        </form>
+    </div>
+
+{% endblock content %}

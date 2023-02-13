@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="form">
+  <h3>{{ title }}</h3></br>
+<form method="POST" enctype='multipart/form-data'>
+  {% csrf_token %}
+  <div>
+    {% if request.get_full_path == "/create-review/" %}
+     <h4>Livre / Article</h4>
+    {{ t_form }}
+  </div>
+    {% else %}
+  <div>
+    <h5>{{ post.title }}</h5>
+    <small>{{ post.time_created|date:"H:i, d F Y" }}</small>
+    <div class="ticket-description">
+      {% if post.image %}
+      <img src="{{ post.image.url }}" alt="{{ post.title }}">
+      {% endif %}
+      <p>{{ post.description }}</p>
+    </div>
+    {% endif %}
+  <hr>
+  <div>  
+    <h4>Votre critique :</h4>
+    <div class="form-group">
+      {{ r_form.headline.label_tag }}
+      {{ r_form.headline }}
+      <div>
+        {{ r_form.rating.label_tag }}
+        {% for radio in r_form.rating %}
+          <div class="form-check form-check-inline">
+            {{ radio }}
+          </div>
+        {% endfor %}
+      </div>
+      {{ r_form.body.label_tag }}
+      {{ r_form.body }}
+      <button class="btn btn-secondary" type="submit">Valider</button>
+    </div>
+  </div>
+</form>
+</div>
+
+{% endblock content %}
+

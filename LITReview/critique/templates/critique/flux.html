@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <h3> {{ title }} </h3>
+    <div></br>
+      <a type="button" class="btn btn-secondary w-25 p-2"  href="{% url 'create_ticket' %}">Demander une critique</a>
+      <a type="button" class="btn btn-secondary w-25 p-2" href="{% url 'create_review' %}">Créer une critique</a>
+    </div>
+</div>
+
+{% if posts %}
+<!--  {% include 'critique/pagination.html' %} -->
+  {% for post in posts %}
+
+    {% if post.content_type == 'REVIEW' %}
+      {% include 'critique/review_snippet.html' %}
+    {% elif post.content_type == 'TICKET' %}
+      {% include 'critique/ticket_snippet.html' %}
+    {% endif %}
+
+  {% endfor %} </br>
+
+  {% include 'critique/pagination.html' %}
+
+  {% else %}
+
+  <h3>Aucune publication</h3>
+
+{% endif %}
+
+{% endblock content %}
