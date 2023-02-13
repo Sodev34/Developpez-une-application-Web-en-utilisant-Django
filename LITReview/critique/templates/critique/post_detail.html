@@ -2,9 +2,9 @@
 {% block content %}
 
 {% if title == 'Ticket' %}
-  {% include 'critique/ticket_snippet.html' %}
+  {% include 'critique/ticket_base.html' %}
 {% elif title == 'Critique du livre' %}
-  {% include 'critique/review_snippet.html' %}
+  {% include 'critique/review_base.html' %}
 {% endif %}
 
 {% endblock content %}

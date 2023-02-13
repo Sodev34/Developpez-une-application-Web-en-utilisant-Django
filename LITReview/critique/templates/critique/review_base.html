@@ -21,7 +21,7 @@
       {% elif post.user not in followed_users %}
           <div>
             <small> Vous n'êtes pas abonné à {{ post.user }}</small>
-         <!--   <a href="{% url 'subscriptions' %}">S'abonner</a> -->
+            <a href="{% url 'subscriptions' %}"> --> S'abonner</a> 
           </div>
       {% endif %}
     </div>
@@ -62,7 +62,7 @@
             {% elif post.ticket.user not in followed_users %}
          </br><div style="display:inline">
                 Vous n'êtes pas abonné à {{ post.ticket.user }}
-          <!---->      <a href="{% url 'subscriptions' %}">S'abonner</a>-->
+                <a href="{% url 'subscriptions' %}"> --> S'abonner</a>
               </div>
             {% endif %}
           </div>
