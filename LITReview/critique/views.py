@@ -3,7 +3,6 @@ from itertools import chain
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
-#from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.db.models import Value, CharField
 from django.shortcuts import render, redirect, get_object_or_404
@@ -21,6 +20,8 @@ from .complements import (
 
 
 # -------- FLUX --------
+
+
 @login_required
 def flux(request):
     followed_users = find_user_follows(request.user)
@@ -38,7 +39,7 @@ def flux(request):
     )
 
     if posts_list:
-        paginator = Paginator(posts_list, 5)
+        paginator = Paginator(posts_list, 4)
         page = request.GET.get("page")
         posts = paginator.get_page(page)
     else:
@@ -77,7 +78,7 @@ def posts(request, pk=None):
     )
 
     if posts_list:
-        paginator = Paginator(posts_list, 5)
+        paginator = Paginator(posts_list, 4)
         page = request.GET.get("page")
         posts = paginator.get_page(page)
         total_posts = paginator.count
@@ -139,26 +140,16 @@ def create_review(request):
 @login_required
 def review_response(request, pk):
     ticket = get_object_or_404(Ticket, id=pk)
+    r_form = ReviewForm(request.POST or None)
 
-    if request.method == "POST":
-        r_form = ReviewForm(request.POST)
-
-        if r_form.is_valid():
-            Review.objects.create(
-                ticket=ticket,
-                user=request.user,
-                headline=request.POST["headline"],
-                rating=request.POST["rating"],
-                body=request.POST["body"],
-            )
-
-            return redirect("flux")
-
-    else:
-        r_form = ReviewForm()
+    if r_form.is_valid():
+        review = r_form.save(commit=False)
+        review.ticket = ticket
+        review.user = request.user
+        review.save()
+        return redirect("flux")
 
     context = {"r_form": r_form, "post": ticket, "title": "Crée une critique"}
-
     return render(request, "critique/create_review.html", context)
 
 
@@ -166,18 +157,13 @@ def review_response(request, pk):
 def review_update(request, pk):
     review = get_object_or_404(Review, id=pk)
     if review.user != request.user:
-        #raise PermissionDenied()
-        return redirect('flux')
+        return redirect("flux")
 
-    #if request.method == "POST":
     r_form = ReviewForm(request.POST or None, instance=review)
 
     if r_form.is_valid():
         r_form.save()
         return redirect("flux")
-
-    #else:
-     #   r_form = ReviewForm(instance=review)
 
     context = {
         "r_form": r_form,
@@ -248,18 +234,13 @@ def create_ticket(request):
 def ticket_update(request, pk):
     ticket = get_object_or_404(Ticket, id=pk)
     if ticket.user != request.user:
-        #raise PermissionDenied()
-        return redirect('flux')
+        return redirect("flux")
 
-   # if request.method == "POST":
     form = TicketForm(request.POST or None, instance=ticket)
 
     if form.is_valid():
         form.save()
         return redirect("flux")
-
-    #else:
-     #   form = TicketForm(instance=ticket)
 
     context = {"form": form, "title": "Modifer votre ticket"}
 
