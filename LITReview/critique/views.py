@@ -3,7 +3,7 @@ from itertools import chain
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
-from django.core.exceptions import PermissionDenied
+#from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.db.models import Value, CharField
 from django.shortcuts import render, redirect, get_object_or_404
@@ -166,17 +166,18 @@ def review_response(request, pk):
 def review_update(request, pk):
     review = get_object_or_404(Review, id=pk)
     if review.user != request.user:
-        raise PermissionDenied()
+        #raise PermissionDenied()
+        return redirect('flux')
 
-    if request.method == "POST":
-        r_form = ReviewForm(request.POST, instance=review)
+    #if request.method == "POST":
+    r_form = ReviewForm(request.POST or None, instance=review)
 
-        if r_form.is_valid():
-            r_form.save()
-            return redirect("flux")
+    if r_form.is_valid():
+        r_form.save()
+        return redirect("flux")
 
-    else:
-        r_form = ReviewForm(instance=review)
+    #else:
+     #   r_form = ReviewForm(instance=review)
 
     context = {
         "r_form": r_form,
@@ -247,17 +248,18 @@ def create_ticket(request):
 def ticket_update(request, pk):
     ticket = get_object_or_404(Ticket, id=pk)
     if ticket.user != request.user:
-        raise PermissionDenied()
+        #raise PermissionDenied()
+        return redirect('flux')
 
-    if request.method == "POST":
-        form = TicketForm(request.POST, request.FILES, instance=ticket)
+   # if request.method == "POST":
+    form = TicketForm(request.POST or None, instance=ticket)
 
-        if form.is_valid():
-            form.save()
-            return redirect("flux")
+    if form.is_valid():
+        form.save()
+        return redirect("flux")
 
-    else:
-        form = TicketForm(instance=ticket)
+    #else:
+     #   form = TicketForm(instance=ticket)
 
     context = {"form": form, "title": "Modifer votre ticket"}
 
