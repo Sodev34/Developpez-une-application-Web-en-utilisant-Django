@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-
     <div class="form form__signup">
         <h3>Inscription</h3>
         <form method="post">
@@ -8,6 +7,5 @@
             {% csrf_token %}
             <input class="btn-info" type="submit" value="S'inscrire">
         </form>
-    </div>
-    
+    </div>   
 {% endblock content %}
