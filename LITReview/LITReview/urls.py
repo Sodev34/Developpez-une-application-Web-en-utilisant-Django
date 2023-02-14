@@ -18,35 +18,51 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from critique.views import (ReviewDeleteView,TicketDeleteView,create_ticket, ticket_update,
-create_review, flux, posts, review_response,ticket_detail, review_detail, review_update)
-from authentification.views import logout_user, profile, signup_page, login_page, subscriptions, UnsubscribeView
+from critique.views import (
+    ReviewDeleteView,
+    TicketDeleteView,
+    create_ticket,
+    ticket_update,
+    create_review,
+    flux,
+    posts,
+    review_response,
+    ticket_detail,
+    review_detail,
+    review_update,
+)
+from authentification.views import (
+    logout_user,
+    profile,
+    signup_page,
+    login_page,
+    subscriptions,
+    UnsubscribeView,
+)
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     # authentification
-    path('', login_page, name='login'),
-    path('signup/', signup_page, name='signup'),
-    path('logout/', logout_user, name='logout'),
-    path('profile/', profile, name='profile'),
-    path('subscriptions/', subscriptions, name='subscriptions'),
-    path('unsubscribe/<int:pk>/', UnsubscribeView.as_view(), name='unsubscribe'),
-
+    path("", login_page, name="login"),
+    path("signup/", signup_page, name="signup"),
+    path("logout/", logout_user, name="logout"),
+    path("profile/", profile, name="profile"),
+    path("subscriptions/", subscriptions, name="subscriptions"),
+    path("unsubscribe/<int:pk>/", UnsubscribeView.as_view(), name="unsubscribe"),
     # critique
-    path('flux/', flux, name='flux'),
-    path('posts/', posts, name='posts'),
-    path('user-posts/<int:pk>/', posts, name='user_posts'),
-    path('create-ticket/', create_ticket, name='create_ticket'),
-    path('ticket/<int:pk>/update/', ticket_update, name='ticket_update'),
-    path('ticket/<int:pk>/detail', ticket_detail, name='ticket_detail'),
-    path('ticket/<int:pk>/delete/', TicketDeleteView.as_view(), name='ticket_delete'),
-    path('create-review/', create_review, name='create_review'),
-    path('review/<int:pk>/detail', review_detail, name='review_detail'),
-    path('review-response/<int:pk>', review_response, name='response_review'),
-    path('review/<int:pk>/update/', review_update, name='review_update'),
-    path('review/<int:pk>/delete/', ReviewDeleteView.as_view(), name='review_delete'),
-    
+    path("flux/", flux, name="flux"),
+    path("posts/", posts, name="posts"),
+    path("user-posts/<int:pk>/", posts, name="user_posts"),
+    path("create-ticket/", create_ticket, name="create_ticket"),
+    path("ticket/<int:pk>/update/", ticket_update, name="ticket_update"),
+    path("ticket/<int:pk>/detail", ticket_detail, name="ticket_detail"),
+    path("ticket/<int:pk>/delete/", TicketDeleteView.as_view(), name="ticket_delete"),
+    path("create-review/", create_review, name="create_review"),
+    path("review/<int:pk>/detail", review_detail, name="review_detail"),
+    path("review-response/<int:pk>", review_response, name="response_review"),
+    path("review/<int:pk>/update/", review_update, name="review_update"),
+    path("review/<int:pk>/delete/", ReviewDeleteView.as_view(), name="review_delete"),
 ]
 
 if settings.DEBUG:
