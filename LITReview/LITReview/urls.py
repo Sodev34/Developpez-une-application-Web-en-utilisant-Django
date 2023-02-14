@@ -43,14 +43,18 @@ from authentification.views import (
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+
     # authentification
+
     path("", login_page, name="login"),
     path("signup/", signup_page, name="signup"),
     path("logout/", logout_user, name="logout"),
     path("profile/", profile, name="profile"),
     path("subscriptions/", subscriptions, name="subscriptions"),
     path("unsubscribe/<int:pk>/", UnsubscribeView.as_view(), name="unsubscribe"),
+
     # critique
+    
     path("flux/", flux, name="flux"),
     path("posts/", posts, name="posts"),
     path("user-posts/<int:pk>/", posts, name="user_posts"),
