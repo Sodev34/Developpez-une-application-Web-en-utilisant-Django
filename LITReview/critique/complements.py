@@ -13,10 +13,15 @@ def find_viewable_reviews(user: User):
 
     return reviews
 
+
 def find_viewable_tickets(user: User):
     followed_users = find_user_follows(user) + [user]
-    replied_tickets = Review.objects.filter(user__in=followed_users).values_list("ticket", flat=True)
-    tickets = Ticket.objects.exclude(id__in=replied_tickets).filter(user__in=followed_users)
+    replied_tickets = Review.objects.filter(user__in=followed_users).values_list(
+        "ticket", flat=True
+    )
+    tickets = Ticket.objects.exclude(id__in=replied_tickets).filter(
+        user__in=followed_users
+    )
     return tickets
 
 
@@ -30,4 +35,3 @@ def find_user_follows(user):
     follows = UserFollow.objects.filter(user=user)
     followed_users = [follow.followed_user for follow in follows]
     return followed_users
-
