@@ -6,7 +6,7 @@
     {% csrf_token %}
     <div class="form">
       <h3>Supprimer de la critique</h3></br>
-      <h4>Je confirme la suppression du ticket "{{ post.headline }}"?</h4>
+      <h4>Je confirme la suppression du ticket {{ post.headline }} ?</h4>
       <button class="btn btn-secondary" type="submit">Supprimer</button>
       <a class="btn btn-secondary text-white" href="{% url 'flux' %}">Annuler</a>
     </div>
