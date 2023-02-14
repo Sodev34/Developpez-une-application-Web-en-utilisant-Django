@@ -1,5 +1,7 @@
 # Developpez une application Web en utilisant Django
- Projet 9 OC
+ Projet 9 OC / Développement d'une application Web utilisant Django. 
+ Il s'agit d'une application qui permet de demander et d'obtenir des critiques de livres ou d'articles.
+
 
 ____
 ## Lancer le programme sous Python 3.9.12 :
