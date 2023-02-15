@@ -9,11 +9,11 @@ class ReviewForm(forms.ModelForm):
         label="Notes",
         widget=forms.RadioSelect(attrs={"class": "form-check-inline"}),
         choices=(
-            (1, "1 star"),
-            (2, "2 stars"),
-            (3, "3 stars"),
-            (4, "4 stars"),
-            (5, "5 stars"),
+            (1, "1 étoile"),
+            (2, "2 étoiles"),
+            (3, "3 étoiles"),
+            (4, "4 étoiles"),
+            (5, "5 étoiles"),
         ),
     )
     body = forms.CharField(
